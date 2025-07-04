@@ -2,18 +2,16 @@
 import streamlit as st
 import geemap.foliumap as geemap
 import ee
-import json
 
 st.set_page_config(layout="wide")
 st.title("MWM Mapping Wilderness Management")
 
-# Leer JSON desde secrets
-service_account_info = json.loads(st.secrets["GEE_JSON"])
+# Cargar directamente desde secrets
+service_account_info = st.secrets["GEE_JSON"]
 
-# Inicializar EE
 credentials = ee.ServiceAccountCredentials(
-    email=service_account_info['client_email'],
-    key_data=json.dumps(service_account_info)
+    email=service_account_info["client_email"],
+    key_data=json.dumps(service_account_info)  # aquí sí generamos el string JSON para las credenciales
 )
 ee.Initialize(credentials)
 
