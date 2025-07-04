@@ -19,7 +19,7 @@ credentials = ee.ServiceAccountCredentials(
 )
 ee.Initialize(credentials)
 
-st.markdown("<h3>Áreas Protegidas en Argentina</h3>", unsafe_allow_html=True)
+st.header("Áreas Protegidas en Argentina")
 st.markdown("<p style='font-size:18px;'>Argentina cuenta con un extenso Sistema Nacional de Áreas Protegidas (SNAP) que abarca diversas categorías como parques nacionales, reservas naturales y monumentos naturales, con el objetivo de proteger la biodiversidad y los ecosistemas del país.</p>", unsafe_allow_html=True)
 Map = geemap.Map(center=[-38.0, -64.0], zoom=4.5)
 
@@ -35,7 +35,7 @@ Map.to_streamlit()
 
 st.divider()
 st.header("Variación del NDVI en el Norte Argentino")
-st.markdown("<p style='font-size:18px;'>Cálculo del estado promedio de la vegetación en todas las áreas protegidas terrestres de Argentina para dos años clave: 2015 y 2024, usando imágenes satelitales y el índice NDVI. Para cada región y para los años 2015 y 2020, se calcula el NDVI promedio anual utilizando imágenes Sentinel-2.</p>", unsafe_allow_html=True)
+st.markdown("<p style='font-size:18px;'>Cálculo del estado promedio de la vegetación en áreas terrestres del Norte Argentino para dos años clave: 2015 y 2024, usando imágenes satelitales y el índice NDVI. Para cada región y para los años 2015 y 2020, se calcula el NDVI promedio anual utilizando imágenes Sentinel-2.</p>", unsafe_allow_html=True)
 
 # Definir regiones con polígonos aproximados
 norte = ee.Geometry.Polygon([[[-64.5, -21], [-60, -21], [-60, -26.5], [-65, -26.5], [-65, -21]]])
@@ -93,3 +93,13 @@ vis_params = {
 Map_ndvi.addLayer(ndvi_diferencia_norte, vis_params, 'Delta NDVI Norte (2024 - 2015)')
 
 Map_ndvi.to_streamlit()
+
+st.divider()
+st.subheader("NDVI y áreas protegidas")
+st.markdown("<p style='font-size:18px;'>Análisis de las variaciones del índice NDVI en las regiones protegidas de Argentina.</p>", unsafe_allow_html=True)
+st.image("ap_ndvi.png", use_column_width=True)
+st.markdown("<p style='font-size:18px;'>Existe una tendencia general negativa. Solamente cinco áreas mejoraron su NDVI. La mayoría sufrieron una disminución en la calidad de vegetación. El deterioro evidente se concentra en regiones que deberían estar conservadas.</p>", unsafe_allow_html=True)
+st.divider()
+
+st.subheader("El Impenetrable en riesgo")
+
