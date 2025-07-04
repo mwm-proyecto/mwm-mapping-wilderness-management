@@ -2,11 +2,20 @@
 import streamlit as st
 import geemap.foliumap as geemap
 import ee
+import json
 
 st.set_page_config(layout="wide")
 st.title("MWM Mapping Wilderness Management")
 
-ee.Initialize()
+# Leer JSON desde secrets
+service_account_info = json.loads(st.secrets["GEE_JSON"])
+
+# Inicializar EE
+credentials = ee.ServiceAccountCredentials(
+    email=service_account_info['client_email'],
+    key_data=json.dumps(service_account_info)
+)
+ee.Initialize(credentials)
 
 Map = geemap.Map(center=[-38.0, -64.0], zoom=4.5)
 
