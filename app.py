@@ -11,7 +11,7 @@ service_account_info = st.secrets["GEE_JSON"]
 
 credentials = ee.ServiceAccountCredentials(
     email=service_account_info["client_email"],
-    key_data=json.dumps(service_account_info)  # aquí sí generamos el string JSON para las credenciales
+    key_data=json.dumps(dict(service_account_info))  # aquí sí generamos el string JSON para las credenciales
 )
 ee.Initialize(credentials)
 
