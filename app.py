@@ -159,5 +159,5 @@ st.markdown(
 col1, col2, col3 = st.columns([1, 2, 1])
 
 with col2:
-    st.image("chaco_def.png", width=300)  # Ajustá el ancho a un tamaño más pequeño (por ej. 300px)
+    st.image("chaco_def.png", width=450)  # Ajustá el ancho a un tamaño más pequeño (por ej. 300px)
     st.caption("Puntos de deforestación registrados en la zona del norte argentino hasta 2022.")  # Texto abajo, estilo pequeño y gris
