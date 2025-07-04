@@ -109,7 +109,7 @@ st.markdown("<p style='font-size:18px;'>Análisis de las variaciones del índice
 col1, col2, col3 = st.columns([1, 2, 1])
 
 with col2:
-    st.image("ap_ndvi.png", use_column_width=True)
+    st.image("ap_ndvi.png", use_container_width=True)
 
 st.markdown("<p style='font-size:18px;'>Existe una tendencia general negativa. Solamente cinco áreas mejoraron su NDVI. La mayoría sufrieron una disminución en la calidad de vegetación. El deterioro evidente se concentra en regiones que deberían estar conservadas.</p>", unsafe_allow_html=True)
 st.divider()
