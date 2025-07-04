@@ -119,24 +119,23 @@ st.markdown(
     "<p style='font-size:18px;'>Mapa interactivo que muestra las zonas protegidas con riesgo ambiental según análisis recientes.</p>",
     unsafe_allow_html=True
 )
-m = folium.Map(location=[-35, -65], zoom_start=4)
 
-def color_por_riesgo(riesgo):
-    return 'red' if riesgo == 1 else 'green'
+# Crear mapa base
+m = folium.Map(location=[-25, -60], zoom_start=5)
 
-zonas = [
-    {"nombre": "El Impenetrable", "lat": -25.5, "lon": -60.5, "riesgo": 1},
-    {"nombre": "Nahuel Huapi", "lat": -41.0, "lon": -71.5, "riesgo": 0}
-]
+# Función de color según riesgo
+def color(r):
+    return 'red' if r == 1 else 'green'
 
-for zona in zonas:
+# Agregar puntos del DataFrame
+for _, row in df.iterrows():
     folium.CircleMarker(
-        location=[zona["lat"], zona["lon"]],
-        radius=8,
-        color=color_por_riesgo(zona["riesgo"]),
+        location=[row['Latitud'], row['Longitud']],
+        radius=6,
+        color=color(row['Prediccion']),
         fill=True,
         fill_opacity=0.7,
-        popup=zona["nombre"]
+        popup=row['Nombre']
     ).add_to(m)
     
 # Centrado en la página usando columnas
