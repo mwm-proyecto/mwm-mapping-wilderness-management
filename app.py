@@ -33,8 +33,12 @@ ap_argentina = areas_protegidas.filterBounds(argentina.geometry())
 
 Map.addLayer(argentina, {'color': 'blue'}, 'Límite Argentina')
 Map.addLayer(ap_argentina, {'color': 'green'}, 'Áreas protegidas (todo el país)')
-Map.to_streamlit()
 
+col1, col2, col3 = st.columns([1, 3, 1])  # o [1, 2, 1] para más ancho
+
+with col2:
+    Map.to_streamlit(height=500)
+    
 st.divider()
 st.header("Variación del NDVI en el Norte Argentino")
 st.markdown("<p style='font-size:18px;'>Cálculo del estado promedio de la vegetación en áreas terrestres del Norte Argentino para dos años clave: 2015 y 2024, usando imágenes satelitales y el índice NDVI. Para cada región y para los años 2015 y 2020, se calcula el NDVI promedio anual utilizando imágenes Sentinel-2.</p>", unsafe_allow_html=True)
@@ -102,12 +106,11 @@ with col2:
 st.divider()
 st.subheader("NDVI y áreas protegidas")
 st.markdown("<p style='font-size:18px;'>Análisis de las variaciones del índice NDVI en las regiones protegidas de Argentina.</p>", unsafe_allow_html=True)
-st.markdown(
-    "<div style='text-align: center;'>"
-    "<img src='ap_ndvi.png' width='700'>"
-    "</div>",
-    unsafe_allow_html=True
-)
+col1, col2, col3 = st.columns([1, 2, 1])
+
+with col2:
+    st.image("ap_ndvi.png", use_column_width=True)
+
 st.markdown("<p style='font-size:18px;'>Existe una tendencia general negativa. Solamente cinco áreas mejoraron su NDVI. La mayoría sufrieron una disminución en la calidad de vegetación. El deterioro evidente se concentra en regiones que deberían estar conservadas.</p>", unsafe_allow_html=True)
 st.divider()
 
@@ -135,7 +138,11 @@ for zona in zonas:
         fill_opacity=0.7,
         popup=zona["nombre"]
     ).add_to(m)
-st_folium(m, width=700, height=500)
+    
+# Centrado en la página usando columnas
+col1, col2, col3 = st.columns([1, 2, 1])  # columna central más grande
+with col2:
+    st_folium(m, width=700, height=500)
 
 st.markdown(
     "<p style='font-size:18px;'>El Chaco argentino es uno de los focos de deforestación de Sudamérica, siendo la segunda región más deforestada de Argentina tras la Pampa Húmeda.</p>",
