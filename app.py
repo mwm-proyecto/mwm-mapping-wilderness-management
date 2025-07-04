@@ -2,6 +2,8 @@ import json
 import streamlit as st
 import geemap.foliumap as geemap
 import ee
+from streamlit_folium import st_folium
+import folium
 
 st.set_page_config(
     page_title="MWM",
@@ -102,4 +104,27 @@ st.markdown("<p style='font-size:18px;'>Existe una tendencia general negativa. S
 st.divider()
 
 st.subheader("El Impenetrable en riesgo")
+st.markdown(
+    "<p style='font-size:18px;'>Mapa interactivo que muestra las zonas protegidas con riesgo ambiental según análisis recientes.</p>",
+    unsafe_allow_html=True
+)
+m = folium.Map(location=[-35, -65], zoom_start=4)
 
+def color_por_riesgo(riesgo):
+    return 'red' if riesgo == 1 else 'green'
+
+zonas = [
+    {"nombre": "El Impenetrable", "lat": -25.5, "lon": -60.5, "riesgo": 1},
+    {"nombre": "Nahuel Huapi", "lat": -41.0, "lon": -71.5, "riesgo": 0}
+]
+
+for zona in zonas:
+    folium.CircleMarker(
+        location=[zona["lat"], zona["lon"]],
+        radius=8,
+        color=color_por_riesgo(zona["riesgo"]),
+        fill=True,
+        fill_opacity=0.7,
+        popup=zona["nombre"]
+    ).add_to(m)
+st_folium(m, width=700, height=500)
