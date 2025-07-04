@@ -120,6 +120,8 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+import pandas as pd
+df = pd.read_csv('alerta_deforestacion.csv')
 # Crear mapa base
 m = folium.Map(location=[-25, -60], zoom_start=5)
 
