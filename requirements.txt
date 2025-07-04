@@ -3,3 +3,4 @@ geemap
 earthengine-api
 pandas
 numpy
+setuptools
