@@ -94,12 +94,20 @@ vis_params = {
 
 Map_ndvi.addLayer(ndvi_diferencia_norte, vis_params, 'Delta NDVI Norte (2024 - 2015)')
 
-Map_ndvi.to_streamlit()
+col1, col2, col3 = st.columns([1, 3, 1])  # o [1, 2, 1] para más ancho
+
+with col2:
+    Map_ndvi.to_streamlit(height=500)
 
 st.divider()
 st.subheader("NDVI y áreas protegidas")
 st.markdown("<p style='font-size:18px;'>Análisis de las variaciones del índice NDVI en las regiones protegidas de Argentina.</p>", unsafe_allow_html=True)
-st.image("ap_ndvi.png", use_column_width=True)
+st.markdown(
+    "<div style='text-align: center;'>"
+    "<img src='ap_ndvi.png' width='700'>"
+    "</div>",
+    unsafe_allow_html=True
+)
 st.markdown("<p style='font-size:18px;'>Existe una tendencia general negativa. Solamente cinco áreas mejoraron su NDVI. La mayoría sufrieron una disminución en la calidad de vegetación. El deterioro evidente se concentra en regiones que deberían estar conservadas.</p>", unsafe_allow_html=True)
 st.divider()
 
@@ -128,3 +136,12 @@ for zona in zonas:
         popup=zona["nombre"]
     ).add_to(m)
 st_folium(m, width=700, height=500)
+
+st.markdown(
+    "<p style='font-size:18px;'>El Chaco argentino es uno de los focos de deforestación de Sudamérica, siendo la segunda región más deforestada de Argentina tras la Pampa Húmeda.</p>",
+    unsafe_allow_html=True
+)
+st.markdown(
+    "<p style='font-size:18px;'>Entre 1998 y 2020, Chaco perdió más de 1 millón de hectáreas de bosque nativo. Los departamentos de General Güemes y General San Martín (donde se encuentra Villa Río Bermejito y El Espinillo) son de los más afectados en deforestación chaqueña.</p>",
+    unsafe_allow_html=True
+)
