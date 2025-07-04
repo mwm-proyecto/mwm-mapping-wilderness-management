@@ -152,3 +152,11 @@ st.markdown(
     "<p style='font-size:18px;'>Entre 1998 y 2020, Chaco perdió más de 1 millón de hectáreas de bosque nativo. Los departamentos de General Güemes y General San Martín (donde se encuentra Villa Río Bermejito y El Espinillo) son de los más afectados en deforestación chaqueña.</p>",
     unsafe_allow_html=True
 )
+st.markdown(
+    "<p style='font-size:18px;'>Dado los resultados validados con el análisis del Chaco, resulta elevado el riesgo de deforestación identificado en El Impenetrable, se avanzará con un estudio detallado en esta área protegida. Se implementarán nuevas mallas de mayor resolución para localizar con precisión las coordenadas de riesgo inminente, facilitando intervenciones más efectivas y oportunas.</p>",
+    unsafe_allow_html=True
+)
+col1, col2, col3 = st.columns([1, 2, 1])
+
+with col2:
+    st.image("chaco_def.png", use_container_width=True)
